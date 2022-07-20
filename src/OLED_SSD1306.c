@@ -195,7 +195,7 @@ int8_t OLED_1306_Init(i2c_inst_t* hi2c, uint16_t addr, uint16_t w, uint8_t h, ui
 	status |= OLED_1306_SendCmd(0x0);
 
 	status |= OLED_1306_SendCmd(OLED_SSD1306_SETDISPLAYCLOCKDIV);
-	status |= OLED_1306_SendCmd(0xF0); //clock div
+	status |= OLED_1306_SendCmd(0x20); //clock div
 
 	status |= OLED_1306_SendCmd(OLED_SSD1306_SETPRECHARGE);
 	status |= OLED_1306_SendCmd(0x22);
@@ -269,8 +269,7 @@ int8_t OLED_1306_SendCmd(uint8_t cmd){
 
 	uint8_t buf[2] = {0x00, cmd};
     status = i2c_write_blocking(oled_hi2c, oled_address, buf, 2, false);
-	sleep_ms(50);
-
+	
 	return status > 0 ? 0 : status;
 }
 
