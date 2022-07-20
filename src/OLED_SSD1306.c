@@ -195,7 +195,7 @@ int8_t OLED_1306_Init(i2c_inst_t* hi2c, uint16_t addr, uint16_t w, uint8_t h, ui
 	status |= OLED_1306_SendCmd(0x0);
 
 	status |= OLED_1306_SendCmd(OLED_SSD1306_SETDISPLAYCLOCKDIV);
-	status |= OLED_1306_SendCmd(0x80); //clock div
+	status |= OLED_1306_SendCmd(0xF0); //clock div
 
 	status |= OLED_1306_SendCmd(OLED_SSD1306_SETPRECHARGE);
 	status |= OLED_1306_SendCmd(0x22);
@@ -248,17 +248,16 @@ int8_t OLED_1306_DrawPixel(int16_t x, int16_t y, uint16_t color){
 
 int8_t OLED_1306_Display(){
 	int8_t status = 0;
-	int8_t send = 0;
+
 	for(uint8_t i = 0; i < height/8; i++) {
 		status |= OLED_1306_SendCmd(0xB0+i);
 		status |= OLED_1306_SendCmd(0x00);
 		status |= OLED_1306_SendCmd(0x10);
 		uint8_t* temp = malloc(width+1);
 		temp[0] = 0x40;
-		memcpy(&(frame[width*i]), temp+1, width);
-    	send = i2c_write_blocking(oled_hi2c, oled_address, temp, width+1, false); //0x40
+		memcpy(temp+1, &(frame[width*i]), width);
+    	status |= !i2c_write_blocking(oled_hi2c, oled_address, temp, width+1, false); //0x40
 
-		status |= send > 0 ? 0 : send;
 		free(temp);
 	}
 
