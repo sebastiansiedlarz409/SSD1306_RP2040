@@ -17,6 +17,7 @@ int main() {
     
     OLED_1306_Init(i2c1, 0x3C, 128, 64, 0);
     OLED_1306_DrawPixel(1, 1, WHITE);
+    OLED_1306_DrawCircle(70,30,10,WHITE);
     OLED_1306_Display();
 
     sleep_ms(2000);

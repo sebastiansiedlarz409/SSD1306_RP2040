@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
@@ -89,6 +90,21 @@ int8_t OLED_1306_DrawCharacter(uint16_t x, uint16_t y, char chr, uint8_t font_si
             }
         }
     }
+
+	return status;
+}
+
+int8_t OLED_1306_DrawCircle(uint8_t x, uint8_t y, uint8_t r, uint8_t color){
+	int8_t status = 0;
+
+	for(uint8_t i = 0;i<width;i++){
+		for(uint8_t j = 0;j<height;j++){
+			double distance = sqrt((x-i)*(x-i)+(y-j)*(y-j));
+			if(distance<=r){
+				status |= OLED_1306_DrawPixel(i,j, color);
+			}
+		}
+	}
 
 	return status;
 }
