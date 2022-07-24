@@ -151,6 +151,7 @@ int8_t OLED_1306_DrawHorLine(uint8_t sx, uint8_t sy, uint8_t ex, uint8_t color);
 int8_t OLED_1306_DrawVerLine(uint8_t sx, uint8_t sy, uint8_t ex, uint8_t color);
 int8_t OLED_1306_DrawRectangle(uint8_t sx, uint8_t sy, uint8_t ex, uint8_t ey, uint8_t color, uint8_t fill_color);
 int8_t OLED_1306_DrawCircle(uint8_t x, uint8_t y, uint8_t r, uint8_t color);
+int8_t OLED_1306_DrawImage(uint8_t* image, uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t color);
 int8_t OLED_1306_DrawCharacter(uint16_t x, uint16_t y, char chr, uint8_t font_size, uint8_t color);
 int8_t OLED_1306_DrawString(int x, int y, const char* str, uint8_t font_size, uint8_t color);
 int8_t OLED_1306_InvertColors();

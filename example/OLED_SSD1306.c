@@ -94,6 +94,30 @@ int8_t OLED_1306_DrawCharacter(uint16_t x, uint16_t y, char chr, uint8_t font_si
 	return status;
 }
 
+int8_t OLED_1306_DrawImage(uint8_t* image, uint8_t x, uint8_t y, uint8_t w, uint8_t h, uint8_t color){
+	int8_t status = 0;
+
+	uint16_t byteWidth = (w + 7) / 8;
+    uint8_t byte = 0;
+
+    if (x >= width || y >= height) {
+        return -1;
+    }
+
+    for (uint8_t j = 0; j < h; j++, y++) {
+        for (uint8_t i = 0; i < w; i++) {
+            if (i & 7)
+                byte <<= 1;
+            else
+                byte = (*(const unsigned char *)(&image[j * byteWidth + i / 8]));
+			if (byte & 0x80)
+                OLED_1306_DrawPixel(x + i, y, color);
+        }
+    }
+	
+	return status;
+}
+
 int8_t OLED_1306_DrawCircle(uint8_t x, uint8_t y, uint8_t r, uint8_t color){
 	int8_t status = 0;
 
