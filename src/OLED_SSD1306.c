@@ -20,6 +20,24 @@ uint8_t* frame = NULL;
 uint8_t oled_address = 0;
 i2c_inst_t* oled_hi2c;
 
+int8_t OLED_1306_SetScreenOn(uint8_t on){
+	int8_t status = 0;
+	if(on)
+		status |= OLED_1306_SendCmd(OLED_SSD1306_DISPLAYON);
+	else
+		status |= OLED_1306_SendCmd(OLED_SSD1306_DISPLAYOFF);
+	return status;
+}
+
+int8_t OLED_1306_SetContrast(uint8_t value){
+	int8_t status = 0;
+	
+	status |= OLED_1306_SendCmd(OLED_SSD1306_SETCONTRAST);
+	status |= OLED_1306_SendCmd(value); //contrast
+	
+	return status;
+}
+
 int8_t OLED_1306_InvertHorizontally(){
 	if(invertHor == 0){
 		invertHor = 1;

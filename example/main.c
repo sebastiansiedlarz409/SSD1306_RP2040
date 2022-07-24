@@ -89,6 +89,12 @@ int main() {
 
     sleep_ms(2000);
 
+    OLED_1306_SetScreenOn(0);
+
+    sleep_ms(2000);
+    OLED_1306_SetScreenOn(1);
+
+    OLED_1306_SetContrast(0x99);
     OLED_1306_FillScreen(BLACK);
     OLED_1306_DrawPixel(1, 1, WHITE);
     OLED_1306_DrawCircle(70,30,10,WHITE);
@@ -96,6 +102,7 @@ int main() {
 
     sleep_ms(2000);
 
+    OLED_1306_SetContrast(0xFF);
     OLED_1306_FillScreen(WHITE);
     OLED_1306_Display();
 

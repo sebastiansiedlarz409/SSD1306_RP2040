@@ -157,3 +157,5 @@ int8_t OLED_1306_DrawString(int x, int y, const char* str, uint8_t font_size, ui
 int8_t OLED_1306_InvertColors();
 int8_t OLED_1306_InvertVertically();
 int8_t OLED_1306_InvertHorizontally();
+int8_t OLED_1306_SetContrast(uint8_t value);
+int8_t OLED_1306_SetScreenOn(uint8_t on);
